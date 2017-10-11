@@ -31,40 +31,29 @@ class ChecklistViewController: UITableViewController {
         //
         if let cell = tableView.cellForRow(at: indexPath) {
             
-            var isChecked = false
-        
             // selecting and unselecting the cell depending on current state
             if indexPath.row == 0 {
                 // changing the value of variable to oppocite every time the row is clicked
                 row0Checked = !row0Checked
-                isChecked = row0Checked
             }
             
             if indexPath.row == 1 {
                 row1Checked = !row1Checked
-                isChecked = row1Checked
             }
             
             if indexPath.row == 2 {
                 row2Checked = !row2Checked
-                isChecked = row2Checked
             }
             
             if indexPath.row == 3 {
                 row3Checked = !row3Checked
-                isChecked = row3Checked
             }
             
             if indexPath.row == 4 {
                 row4Checked = !row4Checked
-                isChecked = row4Checked
             }
             
-            if isChecked {
-                cell.accessoryType = .checkmark
-            } else {
-                cell.accessoryType = .none
-            }
+            configureCheckmark(for: cell, at: indexPath)
         }
 
         // removing highlighting the selected cell
@@ -109,7 +98,7 @@ class ChecklistViewController: UITableViewController {
         if indexPath.row == 0 {
             isChecked = row0Checked
         } else if indexPath.row == 1 {
-            isChecked = row2Checked
+            isChecked = row1Checked
         } else if indexPath.row == 2 {
             isChecked = row2Checked
         } else if indexPath.row == 3 {
