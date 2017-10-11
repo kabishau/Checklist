@@ -56,13 +56,13 @@
 		D44306DE1F8D9F5600E53ACE /* Checklist */ = {
 			isa = PBXGroup;
 			children = (
+				D44306F51F8E7CDA00E53ACE /* ChecklistItem.swift */,
 				D44306DF1F8D9F5600E53ACE /* AppDelegate.swift */,
 				D44306F31F8DA82F00E53ACE /* ChecklistViewController.swift */,
 				D44306E31F8D9F5600E53ACE /* Main.storyboard */,
 				D44306E61F8D9F5600E53ACE /* Assets.xcassets */,
 				D44306E81F8D9F5600E53ACE /* LaunchScreen.storyboard */,
 				D44306EB1F8D9F5600E53ACE /* Info.plist */,
-				D44306F51F8E7CDA00E53ACE /* ChecklistItem.swift */,
 			);
 			path = Checklist;
 			sourceTree = "<group>";
