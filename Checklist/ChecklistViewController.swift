@@ -41,33 +41,29 @@ class ChecklistViewController: UITableViewController {
             }
             
             if indexPath.row == 1 {
-                // changing the value of variable to oppocite every time the row is clicked
                 row1Checked = !row1Checked
                 isChecked = row1Checked
             }
             
             if indexPath.row == 2 {
-                // changing the value of variable to oppocite every time the row is clicked
                 row2Checked = !row2Checked
                 isChecked = row2Checked
             }
             
             if indexPath.row == 3 {
-                // changing the value of variable to oppocite every time the row is clicked
                 row3Checked = !row3Checked
                 isChecked = row3Checked
             }
             
             if indexPath.row == 4 {
-                // changing the value of variable to oppocite every time the row is clicked
                 row4Checked = !row4Checked
                 isChecked = row4Checked
             }
             
             if isChecked {
-                cell.accessoryType = .none
-            } else {
                 cell.accessoryType = .checkmark
+            } else {
+                cell.accessoryType = .none
             }
         }
 
@@ -101,8 +97,32 @@ class ChecklistViewController: UITableViewController {
             label.text = "Sleep"
         }
         
-        return cell
+        configureCheckmark(for: cell, at: indexPath)
         
+        return cell
+    }
+    
+    // method solves the issue of appearance of checkmarks by default
+    func configureCheckmark(for cell: UITableViewCell, at indexPath: IndexPath) {
+        var isChecked = false
+        
+        if indexPath.row == 0 {
+            isChecked = row0Checked
+        } else if indexPath.row == 1 {
+            isChecked = row2Checked
+        } else if indexPath.row == 2 {
+            isChecked = row2Checked
+        } else if indexPath.row == 3 {
+            isChecked = row3Checked
+        } else if indexPath.row == 4 {
+            isChecked = row4Checked
+        }
+        
+        if isChecked {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+        }
     }
 
 }
