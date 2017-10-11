@@ -49,12 +49,12 @@ class ChecklistViewController: UITableViewController {
         
         let row6Item = ChecklistItems()
         row6Item.text = "Learn Unity"
-        row6Item.checked = false
+        row6Item.checked = true
         items.append(row6Item)
         
         let row7Item = ChecklistItems()
         row7Item.text = "Get salary rise"
-        row7Item.checked = false
+        row7Item.checked = true
         items.append(row7Item)
         
         super.init(coder: aDecoder)
@@ -69,13 +69,12 @@ class ChecklistViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //
         if let cell = tableView.cellForRow(at: indexPath) {
             
             let item = items[indexPath.row]
-            item.checked = !item.checked
+            item.toggle()
 
-            configureCheckmark(for: cell, at: indexPath)
+            configureCheckmark(for: cell, with: item)
         }
 
         // removing highlighting the selected cell
@@ -87,24 +86,31 @@ class ChecklistViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChecklistItem", for: indexPath)
-        
-        // creating label with specific tag
-        let label = cell.viewWithTag(1000) as! UILabel
-        // updating label depending on selected row
+
+        // taking the item from the array
         let item = items[indexPath.row]
-        label.text = item.text
         
-        configureCheckmark(for: cell, at: indexPath)
+        configureText(for: cell, with: item)
+        configureCheckmark(for: cell, with: item)
         
         return cell
     }
     
-    // method solves the issue of appearance of checkmarks by default
-    func configureCheckmark(for cell: UITableViewCell, at indexPath: IndexPath) {
+    // define the label content depending on selected row and item property .text
+    
+    func configureText(for cell: UITableViewCell, with item: ChecklistItems) {
         
-        let item = items[indexPath.row]
-        
+        // creating label with specific tag using downcasting
+        let label = cell.viewWithTag(1000) as! UILabel
+        label.text = item.text
+    }
+    
+    // define the appearance of the checkmark depending on item property .checked
+    
+    func configureCheckmark(for cell: UITableViewCell, with item: ChecklistItems) {
+
         if item.checked {
             cell.accessoryType = .checkmark
         } else {
