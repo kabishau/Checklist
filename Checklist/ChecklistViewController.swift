@@ -12,6 +12,26 @@ class ChecklistViewController: UITableViewController {
     
     var items: [ChecklistItems]
     
+    @IBAction func addItem(_ sender: Any) {
+        
+        // index of the new item
+        let newRowIndex = items.count
+        
+        // instance of the new item, properties and adding to array
+        let item = ChecklistItems()
+        item.text = "New Item"
+        item.checked = false
+        items.append(item)
+        
+        // indexPath for adding to array indexPaths to determine location of new item
+        let indexPath = IndexPath(row: newRowIndex, section: 0)
+        let indexPaths = [indexPath]
+        
+        // inserts new item in defined position
+        tableView.insertRows(at: indexPaths, with: .automatic)
+        
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         // initializing array
         items = [ChecklistItems]()
@@ -64,6 +84,9 @@ class ChecklistViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // making Navigation Title larger
+        navigationController?.navigationBar.prefersLargeTitles = true
 
     }
     
@@ -117,5 +140,7 @@ class ChecklistViewController: UITableViewController {
             cell.accessoryType = .none
         }
     }
+    
+
 
 }
