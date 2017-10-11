@@ -30,55 +30,44 @@ class ChecklistViewController: UITableViewController {
         
         //
         if let cell = tableView.cellForRow(at: indexPath) {
+            
+            var isChecked = false
+        
             // selecting and unselecting the cell depending on current state
             if indexPath.row == 0 {
                 // changing the value of variable to oppocite every time the row is clicked
                 row0Checked = !row0Checked
-                if row0Checked {
-                    cell.accessoryType = .none
-                } else {
-                    cell.accessoryType = .checkmark
-                }
+                isChecked = row0Checked
             }
             
             if indexPath.row == 1 {
                 // changing the value of variable to oppocite every time the row is clicked
                 row1Checked = !row1Checked
-                if row1Checked {
-                    cell.accessoryType = .none
-                } else {
-                    cell.accessoryType = .checkmark
-                }
+                isChecked = row1Checked
             }
             
             if indexPath.row == 2 {
                 // changing the value of variable to oppocite every time the row is clicked
                 row2Checked = !row2Checked
-                if row2Checked {
-                    cell.accessoryType = .none
-                } else {
-                    cell.accessoryType = .checkmark
-                }
+                isChecked = row2Checked
             }
             
             if indexPath.row == 3 {
                 // changing the value of variable to oppocite every time the row is clicked
                 row3Checked = !row3Checked
-                if row3Checked {
-                    cell.accessoryType = .none
-                } else {
-                    cell.accessoryType = .checkmark
-                }
+                isChecked = row3Checked
             }
             
             if indexPath.row == 4 {
                 // changing the value of variable to oppocite every time the row is clicked
                 row4Checked = !row4Checked
-                if row4Checked {
-                    cell.accessoryType = .none
-                } else {
-                    cell.accessoryType = .checkmark
-                }
+                isChecked = row4Checked
+            }
+            
+            if isChecked {
+                cell.accessoryType = .none
+            } else {
+                cell.accessoryType = .checkmark
             }
         }
 
