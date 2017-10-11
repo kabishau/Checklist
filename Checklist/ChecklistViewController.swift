@@ -9,6 +9,17 @@
 import UIKit
 
 class ChecklistViewController: UITableViewController {
+    
+    var row0text = "Walk the dog"
+    var row1text = "Brush my teeth"
+    var row2text = "Learn iOS Development"
+    var row3text = "Soccer practice"
+    var row4text = "Eat ice cream"
+    var row0Checked = false
+    var row1Checked = false
+    var row2Checked = false
+    var row3Checked = false
+    var row4Checked = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,10 +31,54 @@ class ChecklistViewController: UITableViewController {
         //
         if let cell = tableView.cellForRow(at: indexPath) {
             // selecting and unselecting the cell depending on current state
-            if cell.accessoryType == .none {
-                cell.accessoryType = .checkmark
-            } else {
-                cell.accessoryType = .none
+            if indexPath.row == 0 {
+                // changing the value of variable to oppocite every time the row is clicked
+                row0Checked = !row0Checked
+                if row0Checked {
+                    cell.accessoryType = .none
+                } else {
+                    cell.accessoryType = .checkmark
+                }
+            }
+            
+            if indexPath.row == 1 {
+                // changing the value of variable to oppocite every time the row is clicked
+                row1Checked = !row1Checked
+                if row1Checked {
+                    cell.accessoryType = .none
+                } else {
+                    cell.accessoryType = .checkmark
+                }
+            }
+            
+            if indexPath.row == 2 {
+                // changing the value of variable to oppocite every time the row is clicked
+                row2Checked = !row2Checked
+                if row2Checked {
+                    cell.accessoryType = .none
+                } else {
+                    cell.accessoryType = .checkmark
+                }
+            }
+            
+            if indexPath.row == 3 {
+                // changing the value of variable to oppocite every time the row is clicked
+                row3Checked = !row3Checked
+                if row3Checked {
+                    cell.accessoryType = .none
+                } else {
+                    cell.accessoryType = .checkmark
+                }
+            }
+            
+            if indexPath.row == 4 {
+                // changing the value of variable to oppocite every time the row is clicked
+                row4Checked = !row4Checked
+                if row4Checked {
+                    cell.accessoryType = .none
+                } else {
+                    cell.accessoryType = .checkmark
+                }
             }
         }
 
@@ -32,7 +87,7 @@ class ChecklistViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 100
+        return 5
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -42,22 +97,21 @@ class ChecklistViewController: UITableViewController {
         let label = cell.viewWithTag(1000) as! UILabel
         
         
-        switch indexPath.row % 5 {
+        switch indexPath.row {
         case 0:
-            label.text = "Walk the dog"
+            label.text = row0text
         case 1:
-            label.text = "Brush my teeth"
+            label.text = row1text
         case 2:
-            label.text = "Learn iOS Development"
+            label.text = row2text
         case 3:
-            label.text = "Soccer practice"
+            label.text = row3text
         case 4:
-            label.text = "Eat ice cream"
+            label.text = row4text
         default:
             label.text = "Sleep"
         }
         
-
         return cell
         
     }
