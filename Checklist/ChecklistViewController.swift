@@ -14,13 +14,17 @@ class ChecklistViewController: UITableViewController {
     
     @IBAction func addItem(_ sender: Any) {
         
+        let titles = ["New1", "New2", "New3", "New4", "New5"]
+        let randomNumber = Int(arc4random_uniform(UInt32(titles.count)))
+        
+        
         // index of the new item
         let newRowIndex = items.count
         
         // instance of the new item, properties and adding to array
         let item = ChecklistItems()
-        item.text = "New Item"
-        item.checked = false
+        item.text = titles[randomNumber]
+        item.checked = true
         items.append(item)
         
         // indexPath for adding to array indexPaths to determine location of new item
