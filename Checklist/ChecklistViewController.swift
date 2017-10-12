@@ -94,6 +94,21 @@ class ChecklistViewController: UITableViewController {
 
     }
     
+    // make the row editable (deleting the row from data source
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        items.remove(at: indexPath.row)
+        
+        // updating UI
+        tableView.reloadData()
+        
+        // alternative method with animation that is not supported in previous step
+        //let indexPaths = [indexPath]
+        //tableView.deleteRows(at: indexPaths, with: .fade)
+        
+    }
+    
+    
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if let cell = tableView.cellForRow(at: indexPath) {
