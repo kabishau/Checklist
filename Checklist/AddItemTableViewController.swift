@@ -8,11 +8,20 @@
 
 import UIKit
 
+// defining the protocol with class only restriction
+protocol AddItemViewControllerDelegate: class {
+    func addItemViewControllerDidCancel(_ controller: AddItemTableViewController)
+    func addItemViewController(_  controller: AddItemTableViewController, didFinishAdding item: ChecklistItems)
+}
+
 class AddItemTableViewController: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var cancelBarButton: UIBarButtonItem!
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
+    
+    // creating delegate property
+    weak var delegate: AddItemViewControllerDelegate?
     
 
     override func viewDidLoad() {
@@ -39,12 +48,22 @@ class AddItemTableViewController: UITableViewController, UITextFieldDelegate {
     
     
     @IBAction func cancel() {
-        navigationController?.popViewController(animated: true)
+        
+        delegate?.addItemViewControllerDidCancel(self)
+        
+        //navigationController?.popViewController(animated: true)
     }
     
     @IBAction func done() {
-        navigationController?.popViewController(animated: true)
-        print("Text in the text field is \(textField.text!)")
+        
+        let item = ChecklistItems()
+        item.text = textField.text!
+        item.checked = false
+        
+        delegate?.addItemViewController(self, didFinishAdding: item)
+        
+        //navigationController?.popViewController(animated: true)
+        //print("Text in the text field is \(textField.text!)")
     }
     
     // this disables selection of the text field
