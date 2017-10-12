@@ -69,6 +69,19 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GST-mn-XzZ" id="SCb-4r-NQ8">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f4f-I7-7YR">
+                                                    <rect key="frame" x="21" y="6" width="281" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                    <connections>
+                                                        <action selector="done" destination="gXe-56-O6W" eventType="editingDidEndOnExit" id="nnE-ct-yBK"/>
+                                                        <outlet property="delegate" destination="gXe-56-O6W" id="W0g-hb-Cl9"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -91,10 +104,15 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="cancelBarButton" destination="cDB-zY-qVQ" id="Nus-MB-Gxk"/>
+                        <outlet property="doneBarButton" destination="Myz-b3-eST" id="V17-Ia-ZUT"/>
+                        <outlet property="textField" destination="f4f-I7-7YR" id="29F-bM-OxA"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZDc-6g-hnr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1397" y="-232"/>
+            <point key="canvasLocation" x="1396.875" y="-232.3943661971831"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pyw-gT-bQO">
