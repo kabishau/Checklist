@@ -14,7 +14,7 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
         navigationController?.popViewController(animated: true)
     }
     
-    func addItemViewController(_ controller: AddItemTableViewController, didFinishAdding item: ChecklistItems) {
+    func addItemViewController(_ controller: AddItemTableViewController, didFinishAdding item: ChecklistItem) {
         
         let newRowIndex = items.count
         items.append(item)
@@ -26,7 +26,7 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     
 
     
-    var items: [ChecklistItems]
+    var items: [ChecklistItem]
     
     @IBAction func addItem(_ sender: Any) {
         
@@ -38,7 +38,7 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
         let newRowIndex = items.count
         
         // instance of the new item, properties and adding to array
-        let item = ChecklistItems()
+        let item = ChecklistItem()
         item.text = titles[randomNumber]
         item.checked = true
         items.append(item)
@@ -54,45 +54,45 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     
     required init?(coder aDecoder: NSCoder) {
         // initializing array
-        items = [ChecklistItems]()
+        items = [ChecklistItem]()
         
-        let row0Item = ChecklistItems()
+        let row0Item = ChecklistItem()
         row0Item.text = "Walk the dog"
         row0Item.checked = false
         items.append(row0Item)
         
         
-        let row1Item = ChecklistItems()
+        let row1Item = ChecklistItem()
         row1Item.text = "Brush my teeth"
         row1Item.checked = false
         items.append(row1Item)
         
-        let row2Item = ChecklistItems()
+        let row2Item = ChecklistItem()
         row2Item.text = "Learn iOS Development"
         row2Item.checked = false
         items.append(row2Item)
         
-        let row3Item = ChecklistItems()
+        let row3Item = ChecklistItem()
         row3Item.text = "Soccer practice"
         row3Item.checked = false
         items.append(row3Item)
         
-        let row4Item = ChecklistItems()
+        let row4Item = ChecklistItem()
         row4Item.text = "Eat ice cream"
         row4Item.checked = false
         items.append(row4Item)
         
-        let row5Item = ChecklistItems()
+        let row5Item = ChecklistItem()
         row5Item.text = "Learn NSCoder"
         row5Item.checked = false
         items.append(row5Item)
         
-        let row6Item = ChecklistItems()
+        let row6Item = ChecklistItem()
         row6Item.text = "Learn Unity"
         row6Item.checked = true
         items.append(row6Item)
         
-        let row7Item = ChecklistItems()
+        let row7Item = ChecklistItem()
         row7Item.text = "Get salary rise"
         row7Item.checked = true
         items.append(row7Item)
@@ -107,7 +107,6 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
         
         // making Navigation Title larger
         navigationController?.navigationBar.prefersLargeTitles = true
-
     }
     
     // called every time when seque is affected
@@ -115,6 +114,13 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
         if segue.identifier == "AddItem" {
             let controller = segue.destination as! AddItemTableViewController
             controller.delegate = self
+        } else if segue.identifier == "EditItem" {
+            let controller = segue.destination as! AddItemTableViewController
+            controller.delegate = self
+            
+            if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
+                controller.itemToEdit = items[indexPath.row]
+            }
         }
     }
     
@@ -166,7 +172,7 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     
     // define the label content depending on selected row and item property .text
     
-    func configureText(for cell: UITableViewCell, with item: ChecklistItems) {
+    func configureText(for cell: UITableViewCell, with item: ChecklistItem) {
         
         // creating label with specific tag using downcasting
         let label = cell.viewWithTag(1000) as! UILabel
@@ -175,12 +181,14 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     
     // define the appearance of the checkmark depending on item property .checked
     
-    func configureCheckmark(for cell: UITableViewCell, with item: ChecklistItems) {
+    func configureCheckmark(for cell: UITableViewCell, with item: ChecklistItem) {
+        
+        let label = cell.viewWithTag(1001) as! UILabel
 
         if item.checked {
-            cell.accessoryType = .checkmark
+            label.text = "√"
         } else {
-            cell.accessoryType = .none
+            label.text = ""
         }
     }
     

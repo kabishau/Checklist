@@ -11,7 +11,7 @@ import UIKit
 // defining the protocol with class only restriction
 protocol AddItemViewControllerDelegate: class {
     func addItemViewControllerDidCancel(_ controller: AddItemTableViewController)
-    func addItemViewController(_  controller: AddItemTableViewController, didFinishAdding item: ChecklistItems)
+    func addItemViewController(_  controller: AddItemTableViewController, didFinishAdding item: ChecklistItem)
 }
 
 class AddItemTableViewController: UITableViewController, UITextFieldDelegate {
@@ -19,9 +19,13 @@ class AddItemTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var cancelBarButton: UIBarButtonItem!
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
+    //
+    var itemToEdit: ChecklistItem?
+    
     
     // creating delegate property
     weak var delegate: AddItemViewControllerDelegate?
+    
     
 
     override func viewDidLoad() {
@@ -29,8 +33,13 @@ class AddItemTableViewController: UITableViewController, UITextFieldDelegate {
         
         navigationItem.largeTitleDisplayMode = .never
         
-        // makes text field the delegate or it can be done using storyboard
-        //textField.delegate = self
+        if let item = itemToEdit {
+            title = "Edit Item"
+            textField.text = item.text
+            // makes bar button done enabled again
+            doneBarButton.isEnabled = true
+        }
+        
     }
     
 
@@ -51,19 +60,16 @@ class AddItemTableViewController: UITableViewController, UITextFieldDelegate {
         
         delegate?.addItemViewControllerDidCancel(self)
         
-        //navigationController?.popViewController(animated: true)
     }
     
     @IBAction func done() {
         
-        let item = ChecklistItems()
+        let item = ChecklistItem()
         item.text = textField.text!
         item.checked = false
         
         delegate?.addItemViewController(self, didFinishAdding: item)
         
-        //navigationController?.popViewController(animated: true)
-        //print("Text in the text field is \(textField.text!)")
     }
     
     // this disables selection of the text field
