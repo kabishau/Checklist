@@ -10,11 +10,11 @@ import UIKit
 
 class ChecklistViewController: UITableViewController, AddItemViewControllerDelegate {
     
-    func addItemViewControllerDidCancel(_ controller: AddItemTableViewController) {
+    func addItemViewControllerDidCancel(_ controller: ItemDetailViewController) {
         navigationController?.popViewController(animated: true)
     }
     
-    func addItemViewController(_ controller: AddItemTableViewController, didFinishAdding item: ChecklistItem) {
+    func addItemViewController(_ controller: ItemDetailViewController, didFinishAdding item: ChecklistItem) {
         
         let newRowIndex = items.count
         items.append(item)
@@ -24,7 +24,7 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
         navigationController?.popViewController(animated: true)
     }
     
-    func addItemViewController(_ controller: AddItemTableViewController, didFinishEditing item: ChecklistItem) {
+    func addItemViewController(_ controller: ItemDetailViewController, didFinishEditing item: ChecklistItem) {
         
         // take advantage of NSObject
         // grabing index of selected row
@@ -128,10 +128,10 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     // called every time when seque is affected
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddItem" {
-            let controller = segue.destination as! AddItemTableViewController
+            let controller = segue.destination as! ItemDetailViewController
             controller.delegate = self
         } else if segue.identifier == "EditItem" {
-            let controller = segue.destination as! AddItemTableViewController
+            let controller = segue.destination as! ItemDetailViewController
             controller.delegate = self
             
             if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
